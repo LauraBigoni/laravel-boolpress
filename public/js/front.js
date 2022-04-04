@@ -2018,6 +2018,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -2027,7 +2045,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     formatDateTime: function formatDateTime() {
       var postDate = new Date(this.post.updated_at);
-      var date = postDate.getDate() + "-" + (postDate.getMonth() + 1) + "-" + postDate.getFullYear();
+      var date = postDate.getDate() + "/" + (postDate.getMonth() + 1) + "/" + postDate.getFullYear();
       var time = postDate.getHours() + ":" + postDate.getMinutes() + ":" + postDate.getSeconds();
       var dateTime = date + " " + time;
       return dateTime;
@@ -38594,25 +38612,68 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.post.is_published
-    ? _c("div", { staticClass: "col-5 px-0 card text-center mb-4" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h5", { staticClass: "card-title mb-0" }, [
-            _vm._v(_vm._s(_vm.post.title)),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("\n\t\t\t" + _vm._s(_vm.post.content) + "\n\t\t"),
+    ? _c(
+        "div",
+        { staticClass: "col-5 px-0 card border-primary text-center mb-4" },
+        [
+          _c("div", { staticClass: "card-header" }, [
+            _c("span", {}, [
+              _vm._v(
+                _vm._s(_vm.post.author.name) +
+                  " - " +
+                  _vm._s(_vm.formatDateTime)
+              ),
+            ]),
           ]),
           _vm._v(" "),
-          _vm._m(0),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer text-muted" }, [
-          _vm._v(_vm._s(_vm.formatDateTime)),
-        ]),
-      ])
+          _c("div", { staticClass: "card-body" }, [
+            _c("h3", { staticClass: "card-title fw-bold" }, [
+              _vm._v(_vm._s(_vm.post.title)),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v("\n\t\t\t" + _vm._s(_vm.post.content) + "\n\t\t"),
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer mt-2 d-flex justify-content-between align-items-center",
+            },
+            [
+              _c(
+                "span",
+                { class: "badge badge-pill badge-" + _vm.post.category.color },
+                [
+                  _vm._v(
+                    "\n\t\t\t" + _vm._s(_vm.post.category.label) + "\n\t\t"
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                _vm._l(_vm.post.tags, function (tag) {
+                  return _c(
+                    "span",
+                    {
+                      key: tag.id,
+                      staticClass: "badge badge-pill text-white mx-2",
+                      style: "background-color: " + tag.color,
+                    },
+                    [_vm._v("\n\t\t\t\t" + _vm._s(tag.label) + "\n\t\t\t")]
+                  )
+                }),
+                0
+              ),
+            ]
+          ),
+        ]
+      )
     : _vm._e()
 }
 var staticRenderFns = [

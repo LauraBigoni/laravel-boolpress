@@ -15,7 +15,7 @@
                 </header>
                 <div class="add-categories d-flex justify-content-end mb-4">
                     <a class="btn btn-sm btn-info" href="{{ route('admin.categories.create') }}"><i
-                            class="fa-solid fa-plus"></span></i></a>
+                            class="fa-solid fa-plus"></i></a>
                 </div>
                 <table class="table">
                     <thead>

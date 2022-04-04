@@ -1,9 +1,13 @@
 <template>
-	<div class="col-5 px-0 card text-center mb-4" v-if="post.is_published">
+	<div
+		class="col-5 px-0 card border-primary text-center mb-4"
+		v-if="post.is_published"
+	>
 		<div class="card-header">
-			<h5 class="card-title mb-0">{{ post.title }}</h5>
+			<span class="">{{ post.author.name }} - {{ formatDateTime }}</span>
 		</div>
 		<div class="card-body">
+			<h3 class="card-title fw-bold">{{ post.title }}</h3>
 			<p class="card-text">
 				{{ post.content }}
 			</p>
@@ -11,7 +15,21 @@
 				><i class="fa-regular fa-square-plus"></i> Visualizza il post</a
 			>
 		</div>
-		<div class="card-footer text-muted">{{ formatDateTime }}</div>
+		<div class="card-footer mt-2 d-flex justify-content-between align-items-center">
+			<span :class="`badge badge-pill badge-${post.category.color}`">
+				{{ post.category.label }}
+			</span>
+			<div>
+				<span
+					v-for="tag in post.tags"
+					:key="tag.id"
+					:style="`background-color: ${tag.color}`"
+					class="badge badge-pill text-white mx-2"
+				>
+					{{ tag.label }}
+				</span>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -27,9 +45,9 @@ export default {
 			const postDate = new Date(this.post.updated_at);
 			const date =
 				postDate.getDate() +
-				"-" +
+				"/" +
 				(postDate.getMonth() + 1) +
-				"-" +
+				"/" +
 				postDate.getFullYear();
 			const time =
 				postDate.getHours() +
