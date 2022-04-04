@@ -1,7 +1,8 @@
 <template>
 	<div>
-		<h1>PROVA</h1>
-		<ul v-if="posts.length">
+		<h1>POSTS</h1>
+		<Loader />
+		<ul v-if="posts.length" class="list-unstyled">
 			<li v-for="post in posts" :key="post.id">
 				{{ post.title }}
 			</li>
@@ -11,6 +12,8 @@
 </template>
 
 <script>
+import Loader from "../Loader.vue";
+
 export default {
 	name: "PostsList",
 	data() {
@@ -18,18 +21,16 @@ export default {
 			posts: [],
 		};
 	},
+	components: { Loader },
 	methods: {
 		getPosts() {
 			axios
 				.get("http://localhost:8000/api/posts")
 				.then((res) => {
-					console.log(res.data);
+					this.posts = res.data;
 				})
 				.catch((err) => {
 					console.error(err);
-				})
-				.then(() => {
-					console.log("chiamata riuscita");
 				});
 		},
 	},

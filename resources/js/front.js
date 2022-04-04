@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Axios from 'axios';
 import App from './components/App.vue';
 
 const root = new Vue({

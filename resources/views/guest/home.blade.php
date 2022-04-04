@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
 </head>
 
-<body>
-    @include('includes.navbar')
+<body id="guest">
     @guest
         <div id="root">
         </div>

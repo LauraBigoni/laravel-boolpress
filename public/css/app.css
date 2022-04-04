@@ -9,11 +9,7 @@
   justify-content: center;
 }
 
-.content {
-  text-align: center;
-}
-
-html body {
+html body:not(#guest) {
   padding-left: 250px;
   background-color: #f6f5ff;
 }
