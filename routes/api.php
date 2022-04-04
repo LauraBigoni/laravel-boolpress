@@ -18,12 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function () {
-    $names = ['laurant', 'nicolas', 'pietros', 'antonios', 'adriana'];
-    $lorem = 'lorem ipsum dolor sit amet, consectetur adip';
-    return response()->json(compact('names', 'lorem'));
-});
-
-Route::get('/posts', 'Api\PostController@index');
-Route::get('/categories', 'Api\CategoryController@index');
-Route::get('/tags', 'Api\TagController@index');
+Route::namespace('Api')
+    ->group(function () {
+        Route::apiResource('/posts', 'PostController');
+        Route::apiResource('/categories', 'CategoryController');
+        Route::apiResource('/tags', 'TagController');
+    });

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // * Qua posso inserire ['register' => false] per esempio, e tolgo il tasto register dalla navbar
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // * Tutte le rotte sono protette con il middleware auth
 Route::middleware('auth')
@@ -35,6 +35,10 @@ Route::middleware('auth')
     });
 
 // * {any} Un parametro che può anche non esserci e se c'è ".*" può essere qualunque cosa. In questo modo qualunque rotta deve andare su Vue e andrà gestita in frontend.
-Route::get('{any?}', function () {
+// Route::get('{any?}', function () {
+//     return view('guest.home');
+// })->where("any", ".*");
+
+Route::get('/', function () {
     return view('guest.home');
-})->where("any", ".*");
+});

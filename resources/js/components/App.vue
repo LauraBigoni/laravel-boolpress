@@ -1,14 +1,11 @@
 <template>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="content">
-					<div class="title m-b-md">
-						<Header />
-					</div>
-					<div class="links">
-						<!-- <a href="#">Blog</a>
-                    <a href="#">Contacts</a> -->
+	<div class="container-fluid px-0">
+		<Navbar />
+		<div class="container">
+			<div class="row">
+				<div class="col-12 my-4">
+					<div class="content">
+						<PostsList />
 					</div>
 				</div>
 			</div>
@@ -17,11 +14,12 @@
 </template>
 
 <script>
-import Header from "./Header.vue";
+import Navbar from "./Navbar.vue";
+import PostsList from "./posts/PostsList.vue";
 
 export default {
 	name: "App",
-	components: { Header },
+	components: { Navbar, PostsList },
 	data() {
 		return {
 			title: "BOOLPRESS",
@@ -30,3 +28,6 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+</style>
