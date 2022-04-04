@@ -2018,13 +2018,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsList",
   data: function data() {
     return {
       posts: [],
-      isLoading: false
+      isLoading: false,
+      error: false,
+      errorMessage: "Si è verificato un errore"
     };
   },
   components: {
@@ -2038,7 +2043,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("http://localhost:8000/api/posts").then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
-        console.error(err);
+        _this.error = true;
       }).then(function () {
         _this.isLoading = false;
       });
@@ -38490,6 +38495,14 @@ var render = function () {
       _c("h1", [_vm._v("POSTS")]),
       _vm._v(" "),
       _vm.isLoading ? _c("Loader") : _vm._e(),
+      _vm._v(" "),
+      _vm.error
+        ? _c(
+            "div",
+            { staticClass: "alert alert-danger", attrs: { role: "alert" } },
+            [_vm._v("\n\t\t" + _vm._s(_vm.errorMessage) + "\n\t")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm.posts.length
         ? _c(

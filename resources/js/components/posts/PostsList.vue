@@ -2,6 +2,9 @@
 	<div>
 		<h1>POSTS</h1>
 		<Loader v-if="isLoading" />
+		<div class="alert alert-danger" role="alert" v-if="error">
+			{{ errorMessage }}
+		</div>
 		<ul v-if="posts.length" class="list-unstyled">
 			<li v-for="post in posts" :key="post.id">
 				{{ post.title }}
@@ -20,6 +23,8 @@ export default {
 		return {
 			posts: [],
 			isLoading: false,
+			error: false,
+			errorMessage: "Si è verificato un errore",
 		};
 	},
 	components: { Loader },
@@ -32,7 +37,7 @@ export default {
 					this.posts = res.data;
 				})
 				.catch((err) => {
-					console.error(err);
+					this.error = true;
 				})
 				.then(() => {
 					this.isLoading = false;
