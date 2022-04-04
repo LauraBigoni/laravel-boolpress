@@ -6,12 +6,12 @@
 		<div class="card-header">
 			<span class="">{{ post.author.name }} - {{ formatDateTime }}</span>
 		</div>
-		<div class="card-body">
+		<div class="card-body d-flex flex-column justify-content-between align-items-center">
 			<h3 class="card-title fw-bold">{{ post.title }}</h3>
 			<p class="card-text">
 				{{ post.content }}
 			</p>
-			<a href="#" class="btn btn-primary"
+			<a href="#" class="btn btn-primary w-50"
 				><i class="fa-regular fa-square-plus"></i> Visualizza il post</a
 			>
 		</div>

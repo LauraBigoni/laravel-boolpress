@@ -20,6 +20,7 @@
 				<PostCard v-for="post in posts" :key="post.id" :post="post" />
 			</div>
 			<p v-else>Non ci sono post</p>
+			<Pagination :pagination="pagination" />
 		</div>
 	</div>
 </template>
@@ -27,6 +28,8 @@
 <script>
 import Loader from "../Loader.vue";
 import PostCard from "./PostCard.vue";
+import Pagination from "../Pagination.vue";
+
 export default {
 	name: "PostsList",
 	data() {
@@ -35,16 +38,22 @@ export default {
 			isLoading: false,
 			error: false,
 			errorMessage: "Si è verificato un errore",
+			pagination: {},
 		};
 	},
-	components: { Loader, PostCard },
+	components: { Loader, PostCard, Pagination },
 	methods: {
 		getPosts() {
 			this.isLoading = true;
 			axios
 				.get("http://localhost:8000/api/posts")
 				.then((res) => {
-					this.posts = res.data;
+					const { data, current_page, last_page } = res.data;
+					this.posts = data;
+					this.pagination = {
+						currentPage: current_page,
+						lastPage: last_page,
+					};
 				})
 				.catch((err) => {
 					this.error = true;
