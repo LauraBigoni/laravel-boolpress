@@ -25,3 +25,5 @@ Route::get('/test', function () {
 });
 
 Route::get('/posts', 'Api\PostController@index');
+Route::get('/categories', 'Api\CategoryController@index');
+Route::get('/tags', 'Api\TagController@index');
