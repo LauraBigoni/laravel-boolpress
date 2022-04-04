@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<h1>POSTS</h1>
-		<Loader v-if="isLoading" />
+		<h1 class="text-center mb-5">POSTS</h1>
 		<div
 			class="
 				alert alert-danger
@@ -15,18 +14,19 @@
 			<span>{{ errorMessage }}</span>
 			<span @click="error = !error" class="h2 mb-0" role="button">&times;</span>
 		</div>
-		<ul v-if="posts.length" class="list-unstyled">
-			<li v-for="post in posts" :key="post.id">
-				{{ post.title }}
-			</li>
-		</ul>
-		<p v-else>Non ci sono post</p>
+		<Loader v-if="isLoading" />
+		<div v-else>
+			<div v-if="posts.length" class="d-flex flex-wrap justify-content-center">
+				<PostCard v-for="post in posts" :key="post.id" :post="post" />
+			</div>
+			<p v-else>Non ci sono post</p>
+		</div>
 	</div>
 </template>
 
 <script>
 import Loader from "../Loader.vue";
-
+import PostCard from "./PostCard.vue";
 export default {
 	name: "PostsList",
 	data() {
@@ -37,7 +37,7 @@ export default {
 			errorMessage: "Si è verificato un errore",
 		};
 	},
-	components: { Loader },
+	components: { Loader, PostCard },
 	methods: {
 		getPosts() {
 			this.isLoading = true;
