@@ -2022,9 +2022,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pagination",
-  props: ["pagination"]
+  props: ["pagination"],
+  methods: {}
 });
 
 /***/ }),
@@ -2154,8 +2167,9 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoading = true;
-      axios.get("http://localhost:8000/api/posts").then(function (res) {
+      axios.get("http://localhost:8000/api/posts?page=" + page).then(function (res) {
         var _res$data = res.data,
             data = _res$data.data,
             current_page = _res$data.current_page,
@@ -38662,23 +38676,68 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "d-flex justify-content-center mt-4" }, [
-    _c("ul", { staticClass: "pagination" }, [
-      _vm.pagination.currentPage > 1
-        ? _c(
+    _c(
+      "ul",
+      { staticClass: "pagination" },
+      [
+        _vm.pagination.currentPage > 1
+          ? _c(
+              "li",
+              {
+                staticClass: "page-item page-link",
+                attrs: { role: "button" },
+                on: {
+                  click: function ($event) {
+                    return _vm.$emit(
+                      "on-page-change",
+                      _vm.pagination.currentPage + -1
+                    )
+                  },
+                },
+              },
+              [_vm._v("\n\t\t\tPrev\n\t\t")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.pagination.lastPage, function (page) {
+          return _c(
             "li",
-            { staticClass: "page-item page-link", attrs: { role: "button" } },
-            [_vm._v("\n\t\t\tPrev\n\t\t")]
+            {
+              key: page,
+              staticClass: "page-item",
+              class: { active: page === _vm.pagination.currentPage },
+              attrs: { role: "button" },
+              on: {
+                click: function ($event) {
+                  return _vm.$emit("on-page-change", page)
+                },
+              },
+            },
+            [_c("span", { staticClass: "page-link" }, [_vm._v(_vm._s(page))])]
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.pagination.lastPage > _vm.pagination.currentPage
-        ? _c(
-            "li",
-            { staticClass: "page-item page-link", attrs: { role: "button" } },
-            [_vm._v("\n\t\t\tNext\n\t\t")]
-          )
-        : _vm._e(),
-    ]),
+        }),
+        _vm._v(" "),
+        _vm.pagination.lastPage > _vm.pagination.currentPage
+          ? _c(
+              "li",
+              {
+                staticClass: "page-item page-link",
+                attrs: { role: "button" },
+                on: {
+                  click: function ($event) {
+                    return _vm.$emit(
+                      "on-page-change",
+                      _vm.pagination.currentPage + 1
+                    )
+                  },
+                },
+              },
+              [_vm._v("\n\t\t\tNext\n\t\t")]
+            )
+          : _vm._e(),
+      ],
+      2
+    ),
   ])
 }
 var staticRenderFns = []
@@ -38782,7 +38841,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "a",
-      { staticClass: "btn btn-primary w-50", attrs: { href: "#" } },
+      {
+        staticClass: "btn border-primary w-50 text-primary",
+        attrs: { href: "#" },
+      },
       [
         _c("i", { staticClass: "fa-regular fa-square-plus" }),
         _vm._v(" Visualizza il post"),
@@ -38863,7 +38925,10 @@ var render = function () {
                   )
                 : _c("p", [_vm._v("Non ci sono post")]),
               _vm._v(" "),
-              _c("Pagination", { attrs: { pagination: _vm.pagination } }),
+              _c("Pagination", {
+                attrs: { pagination: _vm.pagination },
+                on: { "on-page-change": _vm.getPosts },
+              }),
             ],
             1
           ),
