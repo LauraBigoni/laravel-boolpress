@@ -2,8 +2,18 @@
 	<div>
 		<h1>POSTS</h1>
 		<Loader v-if="isLoading" />
-		<div class="alert alert-danger" role="alert" v-if="error">
-			{{ errorMessage }}
+		<div
+			class="
+				alert alert-danger
+				d-flex
+				justify-content-between
+				align-items-center
+			"
+			role="alert"
+			v-if="error"
+		>
+			<span>{{ errorMessage }}</span>
+			<span @click="error = !error" class="h2 mb-0" role="button">&times;</span>
 		</div>
 		<ul v-if="posts.length" class="list-unstyled">
 			<li v-for="post in posts" :key="post.id">

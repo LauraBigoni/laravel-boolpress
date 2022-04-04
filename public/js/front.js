@@ -2021,6 +2021,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsList",
@@ -38499,8 +38509,28 @@ var render = function () {
       _vm.error
         ? _c(
             "div",
-            { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-            [_vm._v("\n\t\t" + _vm._s(_vm.errorMessage) + "\n\t")]
+            {
+              staticClass:
+                "\n\t\t\talert alert-danger\n\t\t\td-flex\n\t\t\tjustify-content-between\n\t\t\talign-items-center\n\t\t",
+              attrs: { role: "alert" },
+            },
+            [
+              _c("span", [_vm._v(_vm._s(_vm.errorMessage))]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "h2 mb-0",
+                  attrs: { role: "button" },
+                  on: {
+                    click: function ($event) {
+                      _vm.error = !_vm.error
+                    },
+                  },
+                },
+                [_vm._v("×")]
+              ),
+            ]
           )
         : _vm._e(),
       _vm._v(" "),
