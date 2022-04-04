@@ -2023,7 +2023,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "PostsList",
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      isLoading: false
     };
   },
   components: {
@@ -2033,10 +2034,13 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
+      this.isLoading = true;
       axios.get("http://localhost:8000/api/posts").then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
         console.error(err);
+      }).then(function () {
+        _this.isLoading = false;
       });
     }
   },
@@ -38485,7 +38489,7 @@ var render = function () {
     [
       _c("h1", [_vm._v("POSTS")]),
       _vm._v(" "),
-      _c("Loader"),
+      _vm.isLoading ? _c("Loader") : _vm._e(),
       _vm._v(" "),
       _vm.posts.length
         ? _c(

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>POSTS</h1>
-		<Loader />
+		<Loader v-if="isLoading" />
 		<ul v-if="posts.length" class="list-unstyled">
 			<li v-for="post in posts" :key="post.id">
 				{{ post.title }}
@@ -19,11 +19,13 @@ export default {
 	data() {
 		return {
 			posts: [],
+			isLoading: false,
 		};
 	},
 	components: { Loader },
 	methods: {
 		getPosts() {
+			this.isLoading = true;
 			axios
 				.get("http://localhost:8000/api/posts")
 				.then((res) => {
@@ -31,6 +33,9 @@ export default {
 				})
 				.catch((err) => {
 					console.error(err);
+				})
+				.then(() => {
+					this.isLoading = false;
 				});
 		},
 	},
