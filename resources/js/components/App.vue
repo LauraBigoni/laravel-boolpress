@@ -21,10 +21,7 @@ export default {
 	name: "App",
 	components: { Navbar, PostsList },
 	data() {
-		return {
-			title: "BOOLPRESS",
-			description: "- Sito in costruzione -",
-		};
+		return {};
 	},
 };
 </script>

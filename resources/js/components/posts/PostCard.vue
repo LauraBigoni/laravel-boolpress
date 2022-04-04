@@ -1,7 +1,7 @@
 <template>
-	<div class="col-5 px-0 card text-center mb-4">
+	<div class="col-5 px-0 card text-center mb-4" v-if="post.is_published">
 		<div class="card-header">
-			<h3 class="card-title mb-0 fw-bold">{{ post.title }}</h3>
+			<h5 class="card-title mb-0">{{ post.title }}</h5>
 		</div>
 		<div class="card-body">
 			<p class="card-text">

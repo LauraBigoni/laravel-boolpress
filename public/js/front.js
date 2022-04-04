@@ -1934,10 +1934,7 @@ __webpack_require__.r(__webpack_exports__);
     PostsList: _posts_PostsList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      title: "BOOLPRESS",
-      description: "- Sito in costruzione -"
-    };
+    return {};
   }
 });
 
@@ -38596,25 +38593,27 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-5 px-0 card text-center mb-4" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title mb-0 fw-bold" }, [
-        _vm._v(_vm._s(_vm.post.title)),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v("\n\t\t\t" + _vm._s(_vm.post.content) + "\n\t\t"),
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-footer text-muted" }, [
-      _vm._v(_vm._s(_vm.formatDateTime)),
-    ]),
-  ])
+  return _vm.post.is_published
+    ? _c("div", { staticClass: "col-5 px-0 card text-center mb-4" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title mb-0" }, [
+            _vm._v(_vm._s(_vm.post.title)),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("\n\t\t\t" + _vm._s(_vm.post.content) + "\n\t\t"),
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer text-muted" }, [
+          _vm._v(_vm._s(_vm.formatDateTime)),
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function () {

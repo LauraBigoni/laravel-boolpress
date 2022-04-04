@@ -1,6 +1,6 @@
 <div id="app">
 
-    <div class="container-fluid header-logo">
+    <div class="container-fluid header-logo py-4">
         <div class="row text-center">
             <div class="col-12">
                 @guest
