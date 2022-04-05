@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')
     ->group(function () {
-        Route::apiResource('/posts', 'PostController');
+        Route::get('/posts', 'PostController@index');
+        Route::get('/posts/{id}', 'PostController@show');
+
         Route::apiResource('/categories', 'CategoryController');
         Route::apiResource('/tags', 'TagController');
     });
