@@ -1,5 +1,5 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid pt-5">
 		<PostsList />
 	</div>
 </template>

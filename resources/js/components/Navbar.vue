@@ -6,8 +6,8 @@
 		<div
 			class="col-12 d-flex flex-row justify-content-center align-items-center"
 		>
-			<router-link class="nav-link" :to="home">HOME</router-link>
-			<router-link class="nav-link" :to="contacts">CONTACTS</router-link>
+			<router-link class="nav-link" to="/">HOME</router-link>
+			<router-link class="nav-link" to="contacts">CONTACTS</router-link>
 		</div>
 	</nav>
 </template>

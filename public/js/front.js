@@ -2060,6 +2060,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactPage"
 });
@@ -2107,6 +2111,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "NotFoundPage"
 });
@@ -2124,6 +2129,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+//
 //
 //
 //
@@ -2176,6 +2182,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -38767,15 +38774,13 @@ var render = function () {
             "col-12 d-flex flex-row justify-content-center align-items-center",
         },
         [
-          _c(
-            "router-link",
-            { staticClass: "nav-link", attrs: { to: _vm.home } },
-            [_vm._v("HOME")]
-          ),
+          _c("router-link", { staticClass: "nav-link", attrs: { to: "/" } }, [
+            _vm._v("HOME"),
+          ]),
           _vm._v(" "),
           _c(
             "router-link",
-            { staticClass: "nav-link", attrs: { to: _vm.contacts } },
+            { staticClass: "nav-link", attrs: { to: "contacts" } },
             [_vm._v("CONTACTS")]
           ),
         ],
@@ -38904,13 +38909,24 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v(
-      "\n\tLorem ipsum dolor sit amet consectetur adipisicing elit. Libero, nam, vel\n\tveniam sed quae facilis ratione dolor qui asperiores aut, excepturi amet!\n\tPlaceat facilis soluta quae non illum, tenetur quis. Iure obcaecati vero\n\tesse nostrum officia illo quaerat autem laboriosam. Perspiciatis dolores\n\tquia cum amet labore modi velit aspernatur adipisci sint at vitae ipsam,\n\tveniam possimus odit incidunt distinctio illo! Quis, corporis reprehenderit\n\tearum deserunt corrupti nulla pariatur quos nobis, alias error a in.\n"
-    ),
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container pt-5" }, [
+      _c("h1", [_vm._v("Contattaci")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n\t\tLorem ipsum dolor sit amet consectetur adipisicing elit. Libero, nam, vel\n\t\tveniam sed quae facilis ratione dolor qui asperiores aut, excepturi amet!\n\t\tPlaceat facilis soluta quae non illum, tenetur quis. Iure obcaecati vero\n\t\tesse nostrum officia illo quaerat autem laboriosam. Perspiciatis dolores\n\t\tquia cum amet labore modi velit aspernatur adipisci sint at vitae ipsam,\n\t\tveniam possimus odit incidunt distinctio illo! Quis, corporis\n\t\treprehenderit earum deserunt corrupti nulla pariatur quos nobis, alias\n\t\terror a in.\n\t"
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -38932,7 +38948,12 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [_c("PostsList")], 1)
+  return _c(
+    "div",
+    { staticClass: "container-fluid pt-5" },
+    [_c("PostsList")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38956,20 +38977,31 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "full-height-minus-navbar flex-center text-muted flex-column",
+    },
+    [
+      _c("h3", [_vm._v("404 | Not Found")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-info",
+          on: {
+            click: function ($event) {
+              return _vm.$router.back()
+            },
+          },
+        },
+        [_vm._v("Indietro")]
+      ),
+    ]
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "full-height-minus-navbar flex-center text-muted" },
-      [_c("h3", [_vm._v("404 | Not Found")])]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39001,6 +39033,8 @@ var render = function () {
       _c("h1", [_vm._v("POST DETAIL PAGE")]),
       _vm._v(" "),
       !_vm.post ? _c("PostCard") : _vm._e(),
+      _vm._v(" "),
+      _c("Loader"),
     ],
     1
   )
@@ -39058,8 +39092,13 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c(
-                "router-view",
-                { staticClass: "btn border-primary w-50 text-primary" },
+                "router-link",
+                {
+                  staticClass: "btn border-primary w-50 text-primary",
+                  attrs: {
+                    to: { path: "posts/", params: { slug: _vm.post.slug } },
+                  },
+                },
                 [
                   _c("i", { staticClass: "fa-regular fa-square-plus" }),
                   _vm._v(" Visualizza il\n\t\t\tpost"),
@@ -55376,7 +55415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55390,7 +55429,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 var root = new Vue({
   el: '#root',
-  router: _routes__WEBPACK_IMPORTED_MODULE_2__["default"],
+  router: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   render: function render(h) {
     return h(_components_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }
