@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-12 my-4">
 					<div class="content">
-						<PostsList />
+						<router-view></router-view>
 					</div>
 				</div>
 			</div>
@@ -15,11 +15,10 @@
 
 <script>
 import Navbar from "./Navbar.vue";
-import PostsList from "./posts/PostsList.vue";
 
 export default {
 	name: "App",
-	components: { Navbar, PostsList },
+	components: { Navbar },
 	data() {
 		return {};
 	},

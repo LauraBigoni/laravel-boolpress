@@ -6,6 +6,7 @@
 
 <script>
 import PostsList from "../posts/PostsList.vue";
+
 export default {
 	name: "Homepage",
 	components: { PostsList },

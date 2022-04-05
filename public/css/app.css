@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.full-height-minus-navbar {
+  height: 80vh;
+}
+
 .flex-center {
   align-items: center;
   display: flex;

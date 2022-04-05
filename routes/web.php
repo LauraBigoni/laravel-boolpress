@@ -34,11 +34,7 @@ Route::middleware('auth')
         Route::resource('tags', 'TagController');
     });
 
-// * {any} Un parametro che può anche non esserci e se c'è ".*" può essere qualunque cosa. In questo modo qualunque rotta deve andare su Vue e andrà gestita in frontend.
-// Route::get('{any?}', function () {
-//     return view('guest.home');
-// })->where("any", ".*");
-
-Route::get('/', function () {
+// * {any} Un parametro che può anche non esserci e se c'è ".*" può essere qualunque cosa. In questo modo qualunque rotta che deve andare su Vue e andrà gestita in frontend e php non bloccherà la rotta.
+Route::get('{any?}', function () {
     return view('guest.home');
-});
+})->where("any", ".*");
