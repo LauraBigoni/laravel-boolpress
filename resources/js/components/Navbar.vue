@@ -13,13 +13,19 @@
 				mt-2
 			"
 		>
-			<div class="router">
+			<div class="router w-25 text-left">
 				<router-link to="/">HOME</router-link>
-				<router-link class="mx-4" :to="{ name: 'contacts' }"
+				<router-link class="mx-4" :to="{ name: 'categories' }"
+					>CATEGORIE</router-link
+				>
+				<router-link :to="{ name: 'tags' }">TAG</router-link>
+			</div>
+			<div class="contacts w-50">
+				<router-link class="ml-4" :to="{ name: 'contacts' }"
 					>CONTACTS</router-link
 				>
 			</div>
-			<div class="login ml-auto">
+			<div class="login w-25 text-right">
 				<a href="/admin">LOGIN</a>
 			</div>
 		</div>

@@ -15,17 +15,20 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return response()->json(compact('tags'));
+        $tags = Tag::orderBy('updated_at', 'DESC')->get();
+        return response()->json($tags);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Tag $tag
+     * @param  Int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($label)
     {
-        //
+        $tag = Tag::where('label', $label)->first();
+        if (!$tag) return response('Post Not Found', 404);
+        return response()->json($tag);
     }
+}

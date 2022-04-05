@@ -15,17 +15,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return response()->json(compact('categories'));
+        $categories = Category::orderBy('updated_at', 'DESC')->get();
+        return response()->json($categories);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Category $category
+     * @param  Int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($label)
     {
-        //
+        $category = Category::where('label', $label)->first();
+        if (!$category) return response('Category Not Found', 404);
+        return response()->json($category);
     }
+}

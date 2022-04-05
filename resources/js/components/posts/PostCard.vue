@@ -26,9 +26,16 @@
 		<div
 			class="card-footer mt-2 d-flex justify-content-between align-items-center"
 		>
-			<span :class="`badge badge-pill badge-${post.category.color}`">
-				{{ post.category.label }}
-			</span>
+			<router-link
+				:to="{
+					name: 'category-detail',
+					params: { label: post.category.label },
+				}"
+			>
+				<span :class="`badge badge-pill badge-${post.category.color}`">
+					{{ post.category.label }}
+				</span>
+			</router-link>
 			<div>
 				<span
 					v-for="tag in post.tags"
