@@ -27,8 +27,8 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        // Uso first al posto di get, get da un array(collection), e il first alla prima corrispondenza si ferma
-        $post = Post::where('slug', $slug)->with(['author', 'category', 'tags'])->first();
+        // Uso first al posto di get, get da un array(collection), e il first alla prima corrispondenza si ferma. Il find funziona solo sulla colonna id
+        $post = Post::where('slug', $slug)->with('author', 'category', 'tags')->first();
         if (!$post) return response('Post Not Found', 404);
         return response()->json($post);
     }

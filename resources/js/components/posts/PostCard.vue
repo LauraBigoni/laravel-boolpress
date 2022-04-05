@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="col-5 px-0 card border-primary text-center mb-4"
-		v-if="post.is_published"
-	>
+	<div class="col-5 px-0 card border-primary text-center mb-4" v-if="post">
 		<div class="card-header">
 			<span class="">{{ post.author.name }} - {{ formatDateTime }}</span>
 		</div>
@@ -19,7 +16,8 @@
 			<p class="card-text">
 				{{ post.content }}
 			</p>
-			<router-link v-if="!hideLink"
+			<router-link
+				v-if="!hideLink"
 				:to="{ name: 'post-detail', params: { slug: post.slug } }"
 				class="btn border-primary w-25 text-primary"
 				><i class="fa-regular fa-square-plus"></i> Vedi</router-link

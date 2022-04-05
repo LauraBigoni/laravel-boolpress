@@ -2153,7 +2153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2174,17 +2173,16 @@ __webpack_require__.r(__webpack_exports__);
 
       this.isLoading = true;
       axios.get("http://localhost:8000/api/posts/" + this.$route.params.slug).then(function (res) {
-        console.log(res.data);
         _this.post = res.data;
       })["catch"](function (err) {
         _this.error = true;
       }).then(function () {
         _this.isLoading = false;
       });
-    },
-    mounted: function mounted() {
-      this.getPost();
     }
+  },
+  mounted: function mounted() {
+    this.getPost();
   }
 });
 
@@ -2199,8 +2197,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -39055,15 +39051,28 @@ var render = function () {
   return _c(
     "section",
     {
-      staticClass: "full-height-minus-navbar flex-center text-muted",
+      staticClass: "flex-center flex-column pt-5",
       attrs: { id: "post-detail" },
     },
     [
-      _c("h1", [_vm._v("POST DETAIL PAGE")]),
-      _vm._v(" "),
       _vm.isLoading && !_vm.post
         ? _c("Loader")
         : _c("PostCard", { attrs: { post: _vm.post, "hide-link": true } }),
+      _vm._v(" "),
+      _vm.post
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-info",
+              on: {
+                click: function ($event) {
+                  return _vm.$router.back()
+                },
+              },
+            },
+            [_vm._v("\n\t\tIndietro\n\t")]
+          )
+        : _vm._e(),
     ],
     1
   )
@@ -39090,7 +39099,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.post.is_published
+  return _vm.post
     ? _c(
         "div",
         { staticClass: "col-5 px-0 card border-primary text-center mb-4" },
@@ -39203,7 +39212,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "section",
+    { attrs: { id: "post-index" } },
     [
       _vm.error
         ? _c(

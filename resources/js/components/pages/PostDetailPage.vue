@@ -1,11 +1,10 @@
 <template>
-	<section
-		id="post-detail"
-		class="full-height-minus-navbar flex-center text-muted"
-	>
-		<h1>POST DETAIL PAGE</h1>
+	<section id="post-detail" class="flex-center flex-column pt-5">
 		<Loader v-if="isLoading && !post" />
 		<PostCard v-else :post="post" :hide-link="true" />
+		<button v-if="post" class="btn btn-info" @click="$router.back()">
+			Indietro
+		</button>
 	</section>
 </template>
 
@@ -28,7 +27,6 @@ export default {
 			axios
 				.get("http://localhost:8000/api/posts/" + this.$route.params.slug)
 				.then((res) => {
-					console.log(res.data);
 					this.post = res.data;
 				})
 				.catch((err) => {
@@ -38,9 +36,9 @@ export default {
 					this.isLoading = false;
 				});
 		},
-		mounted() {
-			this.getPost();
-		},
+	},
+	mounted() {
+		this.getPost();
 	},
 };
 </script>

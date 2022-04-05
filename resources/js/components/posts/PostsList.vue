@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<section id="post-index">
 		<div
 			class="
 				alert alert-danger
@@ -21,7 +21,7 @@
 			<p v-else>Non ci sono post</p>
 			<Pagination :pagination="pagination" @on-page-change="getPosts" />
 		</div>
-	</div>
+	</section>
 </template>
 
 <script>
