@@ -3,13 +3,12 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-12">
-					<table class="table" v-if="category">
+					<table class="table">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Colore</th>
-								<th scope="col">Modificato il</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -21,17 +20,16 @@
 										{{ category.color }}
 									</span>
 								</td>
-								<td>{{ formatDateTime }}</td>
 							</tr>
 						</tbody>
 					</table>
-					<Loader v-else />
+					<Loader v-if="isLoading" />
 				</div>
-			</div>
-			<div class="flex-center">
-				<button v-if="category" class="btn btn-info" @click="$router.back()">
-					Indietro
-				</button>
+				<div class="flex-center">
+					<button v-if="category" class="btn btn-info" @click="$router.back()">
+						Indietro
+					</button>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -63,26 +61,6 @@ export default {
 				.then(() => {
 					this.isLoading = false;
 				});
-		},
-	},
-	computed: {
-		formatDateTime() {
-			const postDate = new Date(this.category.updated_at);
-			const date =
-				postDate.getDate() +
-				"/" +
-				(postDate.getMonth() + 1) +
-				"/" +
-				postDate.getFullYear();
-			const time =
-				postDate.getHours() +
-				":" +
-				postDate.getMinutes() +
-				":" +
-				postDate.getSeconds();
-			const dateTime = date + " " + time;
-
-			return dateTime;
 		},
 	},
 	mounted() {

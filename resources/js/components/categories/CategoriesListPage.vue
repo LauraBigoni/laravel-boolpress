@@ -1,7 +1,7 @@
 <template>
 	<section id="categories-list">
 		<div class="container">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" >
 				<div class="col-8">
 					<table class="table">
 						<thead>
@@ -9,7 +9,6 @@
 								<th scope="col">#</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Colore</th>
-								<th scope="col">Modificato il</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -28,7 +27,6 @@
 										</span></router-link
 									>
 								</td>
-								<td>{{ category.updated_at }}</td>
 							</tr>
 						</tbody>
 					</table>

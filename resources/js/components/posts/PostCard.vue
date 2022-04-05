@@ -42,8 +42,15 @@
 					:key="tag.id"
 					:style="`background-color: ${tag.color}`"
 					class="badge badge-pill text-white mx-2"
-				>
-					{{ tag.label }}
+					><router-link
+						class="r-link"
+						:to="{
+							name: 'tag-detail',
+							params: { label: tag.label },
+						}"
+					>
+						{{ tag.label }}
+					</router-link>
 				</span>
 			</div>
 		</div>
@@ -83,5 +90,9 @@ export default {
 <style lang="scss" scoped>
 div.card {
 	margin: 0 20px;
+}
+.r-link {
+	text-decoration: none;
+	color: inherit;
 }
 </style>
