@@ -13,11 +13,11 @@ const router = new VueRouter({
     // history permette di vedere il "finto" link di navigazione nell'url della pagins
     mode: 'history',
     routes: [
-        { path: '/', component: HomePage },
-        { path: '/contacts', component: ContactPage },
+        { path: '/', component: HomePage, name: 'home' },
+        { path: '/contacts', component: ContactPage, name: 'contacts' },
 
         // !!! LA 404 SEMPRE ULTIMA
-        { path: '*', component: NotFoundPage }
+        { path: '*', component: NotFoundPage, name: 'notfound' }
     ]
 });
 

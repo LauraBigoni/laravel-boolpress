@@ -38685,44 +38685,47 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "nav",
+    {
+      staticClass:
+        "navbar navbar-light bg-light px-0 d-flex flex-column text-center",
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-12 d-flex flex-row justify-content-center align-items-center",
+        },
+        [
+          _c("router-link", { staticClass: "nav-link", attrs: { to: "/" } }, [
+            _vm._v("HOME"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "nav-link", attrs: { to: "contacts" } },
+            [_vm._v("CONTACTS")]
+          ),
+        ],
+        1
+      ),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      {
-        staticClass:
-          "navbar navbar-light bg-light px-0 d-flex flex-column text-center",
-      },
-      [
-        _c("div", { staticClass: "col-12" }, [
-          _c("img", {
-            attrs: { src: "images/boolpresslogo.png", alt: "boolpress logo" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "col-12 d-flex flex-row justify-content-center align-items-center",
-          },
-          [
-            _c("a", { staticClass: "nav-link active", attrs: { href: "#" } }, [
-              _vm._v("HOME"),
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("POSTS"),
-            ]),
-          ]
-        ),
-      ]
-    )
+    return _c("div", { staticClass: "col-12" }, [
+      _c("img", {
+        attrs: { src: "images/boolpresslogo.png", alt: "boolpress logo" },
+      }),
+    ])
   },
 ]
 render._withStripped = true
@@ -55259,14 +55262,17 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
     path: '/',
-    component: _components_pages_Homepage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_pages_Homepage_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    name: 'home'
   }, {
     path: '/contacts',
-    component: _components_pages_ContactPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _components_pages_ContactPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    name: 'contacts'
   }, // !!! LA 404 SEMPRE ULTIMA
   {
     path: '*',
-    component: _components_pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _components_pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    name: 'notfound'
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);

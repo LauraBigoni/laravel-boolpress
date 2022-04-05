@@ -6,8 +6,8 @@
 		<div
 			class="col-12 d-flex flex-row justify-content-center align-items-center"
 		>
-			<a class="nav-link active" href="#">HOME</a>
-			<a class="nav-link" href="#">POSTS</a>
+			<router-link class="nav-link" to="/">HOME</router-link>
+			<router-link class="nav-link" to="contacts">CONTACTS</router-link>
 		</div>
 	</nav>
 </template>
