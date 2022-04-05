@@ -6,16 +6,28 @@
 		<div class="card-header">
 			<span class="">{{ post.author.name }} - {{ formatDateTime }}</span>
 		</div>
-		<div class="card-body d-flex flex-column justify-content-between align-items-center">
+		<div
+			class="
+				card-body
+				d-flex
+				flex-column
+				justify-content-between
+				align-items-center
+			"
+		>
 			<h3 class="card-title fw-bold">{{ post.title }}</h3>
 			<p class="card-text">
 				{{ post.content }}
 			</p>
-			<a href="#" class="btn border-primary w-50 text-primary"
-				><i class="fa-regular fa-square-plus"></i> Visualizza il post</a
+			<router-view
+				class="btn border-primary w-50 text-primary"
+				><i class="fa-regular fa-square-plus"></i> Visualizza il
+				post</router-view
 			>
 		</div>
-		<div class="card-footer mt-2 d-flex justify-content-between align-items-center">
+		<div
+			class="card-footer mt-2 d-flex justify-content-between align-items-center"
+		>
 			<span :class="`badge badge-pill badge-${post.category.color}`">
 				{{ post.category.label }}
 			</span>
