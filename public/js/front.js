@@ -2243,7 +2243,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -38784,7 +38783,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "\n\t\t\tcol-12\n\t\t\td-flex\n\t\t\tflex-row\n\t\t\tjustify-content-center\n\t\t\talign-items-center\n\t\t\tmt-2\n\t\t",
+            "\n\t\t\tcol-12\n\t\t\td-flex\n\t\t\tflex-row\n\t\t\tjustify-content-start\n\t\t\talign-items-center\n\t\t\tmt-2\n\t\t",
         },
         [
           _c(
@@ -38823,7 +38822,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "login" }, [
+    return _c("div", { staticClass: "login ml-auto" }, [
       _c("a", { attrs: { href: "/admin" } }, [_vm._v("LOGIN")]),
     ])
   },
@@ -39121,14 +39120,17 @@ var render = function () {
               _c(
                 "router-link",
                 {
-                  staticClass: "btn border-primary w-50 text-primary",
+                  staticClass: "btn border-primary w-25 text-primary",
                   attrs: {
-                    to: { path: "posts", params: { slug: _vm.post.slug } },
+                    to: {
+                      name: "post-detail",
+                      params: { slug: _vm.post.slug },
+                    },
                   },
                 },
                 [
                   _c("i", { staticClass: "fa-regular fa-square-plus" }),
-                  _vm._v(" Visualizza il\n\t\t\tpost"),
+                  _vm._v(" Vedi"),
                 ]
               ),
             ],

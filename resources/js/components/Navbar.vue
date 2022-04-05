@@ -8,7 +8,7 @@
 				col-12
 				d-flex
 				flex-row
-				justify-content-center
+				justify-content-start
 				align-items-center
 				mt-2
 			"
@@ -19,7 +19,7 @@
 					>CONTACTS</router-link
 				>
 			</div>
-			<div class="login">
+			<div class="login ml-auto">
 				<a href="/admin">LOGIN</a>
 			</div>
 		</div>
