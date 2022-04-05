@@ -32,6 +32,10 @@ Route::middleware('auth')
         Route::resource('posts', 'PostController');
         Route::resource('categories', 'CategoryController');
         Route::resource('tags', 'TagController');
+
+        Route::get('/{any}', function () {
+            abort(404);
+        })->where('any', '.*');
     });
 
 // * {any} Un parametro che può anche non esserci e se c'è ".*" può essere qualunque cosa. In questo modo qualunque rotta che deve andare su Vue e andrà gestita in frontend e php non bloccherà la rotta.
