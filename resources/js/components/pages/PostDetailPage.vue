@@ -3,9 +3,9 @@
 		id="post-detail"
 		class="full-height-minus-navbar flex-center text-muted"
 	>
-		<Loader v-if="isLoading" />
 		<h1>POST DETAIL PAGE</h1>
-		<PostCard v-if="!post" />
+		<Loader v-if="isLoading && !post" />
+		<PostCard v-else :post="post" :hide-link="true" />
 	</section>
 </template>
 
@@ -17,24 +17,30 @@ export default {
 	name: "PostDetailPage",
 	components: { PostCard, Loader },
 	data() {
-		return { post: null, isLoading: false };
+		return {
+			post: null,
+			isLoading: false,
+		};
 	},
-	getPost() {
-		this.isLoading = true;
-		axios
-			.get("http://localhost:8000/api/posts/" + this.$route.params.slug)
-			.then((res) => {
-				this.post = res.data;
-			})
-			.catch((err) => {
-				this.error = true;
-			})
-			.then(() => {
-				this.isLoading = false;
-			});
-	},
-	mounted() {
-		this.getPost();
+	methods: {
+		getPost() {
+			this.isLoading = true;
+			axios
+				.get("http://localhost:8000/api/posts/" + this.$route.params.slug)
+				.then((res) => {
+					console.log(res.data);
+					this.post = res.data;
+				})
+				.catch((err) => {
+					this.error = true;
+				})
+				.then(() => {
+					this.isLoading = false;
+				});
+		},
+		mounted() {
+			this.getPost();
+		},
 	},
 };
 </script>

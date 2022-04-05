@@ -2168,20 +2168,23 @@ __webpack_require__.r(__webpack_exports__);
       isLoading: false
     };
   },
-  getPost: function getPost() {
-    var _this = this;
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
 
-    this.isLoading = true;
-    axios.get("http://localhost:8000/api/posts/" + this.$route.params.slug).then(function (res) {
-      _this.post = res.data;
-    })["catch"](function (err) {
-      _this.error = true;
-    }).then(function () {
-      _this.isLoading = false;
-    });
-  },
-  mounted: function mounted() {
-    this.getPost();
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/posts/" + this.$route.params.slug).then(function (res) {
+        console.log(res.data);
+        _this.post = res.data;
+      })["catch"](function (err) {
+        _this.error = true;
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    },
+    mounted: function mounted() {
+      this.getPost();
+    }
   }
 });
 
@@ -2245,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"],
+  props: ["post", "hide-link"],
   data: function data() {
     return {};
   },
@@ -39056,11 +39059,11 @@ var render = function () {
       attrs: { id: "post-detail" },
     },
     [
-      _vm.isLoading ? _c("Loader") : _vm._e(),
-      _vm._v(" "),
       _c("h1", [_vm._v("POST DETAIL PAGE")]),
       _vm._v(" "),
-      !_vm.post ? _c("PostCard") : _vm._e(),
+      _vm.isLoading && !_vm.post
+        ? _c("Loader")
+        : _c("PostCard", { attrs: { post: _vm.post, "hide-link": true } }),
     ],
     1
   )
@@ -39117,22 +39120,24 @@ var render = function () {
                 _vm._v("\n\t\t\t" + _vm._s(_vm.post.content) + "\n\t\t"),
               ]),
               _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn border-primary w-25 text-primary",
-                  attrs: {
-                    to: {
-                      name: "post-detail",
-                      params: { slug: _vm.post.slug },
+              !_vm.hideLink
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "btn border-primary w-25 text-primary",
+                      attrs: {
+                        to: {
+                          name: "post-detail",
+                          params: { slug: _vm.post.slug },
+                        },
+                      },
                     },
-                  },
-                },
-                [
-                  _c("i", { staticClass: "fa-regular fa-square-plus" }),
-                  _vm._v(" Vedi"),
-                ]
-              ),
+                    [
+                      _c("i", { staticClass: "fa-regular fa-square-plus" }),
+                      _vm._v(" Vedi"),
+                    ]
+                  )
+                : _vm._e(),
             ],
             1
           ),

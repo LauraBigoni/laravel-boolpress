@@ -19,7 +19,7 @@
 			<p class="card-text">
 				{{ post.content }}
 			</p>
-			<router-link
+			<router-link v-if="!hideLink"
 				:to="{ name: 'post-detail', params: { slug: post.slug } }"
 				class="btn border-primary w-25 text-primary"
 				><i class="fa-regular fa-square-plus"></i> Vedi</router-link
@@ -48,7 +48,7 @@
 <script>
 export default {
 	name: "PostCard",
-	props: ["post"],
+	props: ["post", "hide-link"],
 	data() {
 		return {};
 	},
