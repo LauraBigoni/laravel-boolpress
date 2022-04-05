@@ -4,10 +4,24 @@
 			<img src="images/boolpresslogo.png" alt="boolpress logo" />
 		</div>
 		<div
-			class="col-12 d-flex flex-row justify-content-center align-items-center"
+			class="
+				col-12
+				d-flex
+				flex-row
+				justify-content-center
+				align-items-center
+				mt-2
+			"
 		>
-			<router-link class="nav-link" to="/">HOME</router-link>
-			<router-link class="nav-link" to="contacts">CONTACTS</router-link>
+			<div class="router">
+				<router-link to="/">HOME</router-link>
+				<router-link class="mx-4" :to="{ name: 'contacts' }"
+					>CONTACTS</router-link
+				>
+			</div>
+			<div class="login">
+				<a href="/admin">LOGIN</a>
+			</div>
 		</div>
 	</nav>
 </template>
@@ -28,8 +42,8 @@ a {
 	color: #6cb2eb;
 	border-bottom: 1px solid transparent;
 }
-a:hover {
-	color: #4ba0e6;
+a.active {
+	color: #0e68b1;
 	border-bottom: 1px solid currentColor;
 }
 </style>

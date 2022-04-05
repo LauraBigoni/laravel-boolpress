@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<h1 class="text-center mb-5">POSTS</h1>
 		<div
 			class="
 				alert alert-danger

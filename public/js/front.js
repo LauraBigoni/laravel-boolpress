@@ -1983,6 +1983,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navbar"
 });
@@ -2261,7 +2275,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
 /* harmony import */ var _Pagination_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Pagination.vue */ "./resources/js/components/Pagination.vue");
-//
 //
 //
 //
@@ -6735,7 +6748,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "img[data-v-6dde423b] {\n  width: 250px;\n  height: auto;\n}\na[data-v-6dde423b] {\n  text-decoration: none;\n  color: #6cb2eb;\n  border-bottom: 1px solid transparent;\n}\na[data-v-6dde423b]:hover {\n  color: #4ba0e6;\n  border-bottom: 1px solid currentColor;\n}", ""]);
+exports.push([module.i, "img[data-v-6dde423b] {\n  width: 250px;\n  height: auto;\n}\na[data-v-6dde423b] {\n  text-decoration: none;\n  color: #6cb2eb;\n  border-bottom: 1px solid transparent;\n}\na.active[data-v-6dde423b] {\n  color: #0e68b1;\n  border-bottom: 1px solid currentColor;\n}", ""]);
 
 // exports
 
@@ -38771,20 +38784,26 @@ var render = function () {
         "div",
         {
           staticClass:
-            "col-12 d-flex flex-row justify-content-center align-items-center",
+            "\n\t\t\tcol-12\n\t\t\td-flex\n\t\t\tflex-row\n\t\t\tjustify-content-center\n\t\t\talign-items-center\n\t\t\tmt-2\n\t\t",
         },
         [
-          _c("router-link", { staticClass: "nav-link", attrs: { to: "/" } }, [
-            _vm._v("HOME"),
-          ]),
-          _vm._v(" "),
           _c(
-            "router-link",
-            { staticClass: "nav-link", attrs: { to: "contacts" } },
-            [_vm._v("CONTACTS")]
+            "div",
+            { staticClass: "router" },
+            [
+              _c("router-link", { attrs: { to: "/" } }, [_vm._v("HOME")]),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "mx-4", attrs: { to: { name: "contacts" } } },
+                [_vm._v("CONTACTS")]
+              ),
+            ],
+            1
           ),
-        ],
-        1
+          _vm._v(" "),
+          _vm._m(1),
+        ]
       ),
     ]
   )
@@ -38798,6 +38817,14 @@ var staticRenderFns = [
       _c("img", {
         attrs: { src: "images/boolpresslogo.png", alt: "boolpress logo" },
       }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "login" }, [
+      _c("a", { attrs: { href: "/admin" } }, [_vm._v("LOGIN")]),
     ])
   },
 ]
@@ -39030,11 +39057,11 @@ var render = function () {
       attrs: { id: "post-detail" },
     },
     [
+      _vm.isLoading ? _c("Loader") : _vm._e(),
+      _vm._v(" "),
       _c("h1", [_vm._v("POST DETAIL PAGE")]),
       _vm._v(" "),
       !_vm.post ? _c("PostCard") : _vm._e(),
-      _vm._v(" "),
-      _c("Loader"),
     ],
     1
   )
@@ -39096,7 +39123,7 @@ var render = function () {
                 {
                   staticClass: "btn border-primary w-50 text-primary",
                   attrs: {
-                    to: { path: "posts/", params: { slug: _vm.post.slug } },
+                    to: { path: "posts", params: { slug: _vm.post.slug } },
                   },
                 },
                 [
@@ -39171,8 +39198,6 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("h1", { staticClass: "text-center mb-5" }, [_vm._v("POSTS")]),
-      _vm._v(" "),
       _vm.error
         ? _c(
             "div",

@@ -20,7 +20,7 @@
 				{{ post.content }}
 			</p>
 			<router-link
-				:to="{ path: 'posts/', params: { slug: post.slug } }"
+				:to="{ path: 'posts', params: { slug: post.slug } }"
 				class="btn border-primary w-50 text-primary"
 				><i class="fa-regular fa-square-plus"></i> Visualizza il
 				post</router-link

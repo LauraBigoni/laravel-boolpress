@@ -3,9 +3,9 @@
 		id="post-detail"
 		class="full-height-minus-navbar flex-center text-muted"
 	>
+		<Loader v-if="isLoading" />
 		<h1>POST DETAIL PAGE</h1>
 		<PostCard v-if="!post" />
-		<Loader />
 	</section>
 </template>
 
