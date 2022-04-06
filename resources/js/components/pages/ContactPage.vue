@@ -156,6 +156,9 @@ export default {
 
 			if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
 			if (!this.form.email.trim()) errors.email = "La mail è obbligatoria.";
+			if (!this.form.subject.trim())
+				errors.subject = "Non hai inserito un oggetto.";
+
 			// Controllo che sia una mail e che sia valida usando le espressioni regolari
 			if (
 				this.form.email.trim() &&
@@ -193,11 +196,23 @@ export default {
 				axios
 					.post("http://localhost:8000/api/messages", params)
 					.then((res) => {
-						this.form.name = "";
-						this.form.email = "";
-						this.form.subject = "";
-						this.form.message = "";
-						this.alertMessage = "Messaggio inviato con successo.";
+						// Controllo se comunque mi arrivano errori DAL BACKEND
+						if (res.data.errors) {
+							// Prendo gli errori DA LARAVEL e li metto comunque dentro errors
+							const { name, email, subject, message } = res.data.errors;
+							const errors = {};
+							if (name) errors.name = name;
+							if (email) errors.email = email;
+							if (subject) errors.subject = subject;
+							if (message) errors.message = message;
+							this.errors = errors;
+						} else {
+							this.form.name = "";
+							this.form.email = "";
+							this.form.subject = "";
+							this.form.message = "";
+							this.alertMessage = "Messaggio inviato con successo.";
+						}
 					})
 					.catch((err) => {
 						// console.error(err.response.status);

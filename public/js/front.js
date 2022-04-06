@@ -2395,7 +2395,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var errors = {}; // ! svuoto all'inizio e ricalcola
 
       if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
-      if (!this.form.email.trim()) errors.email = "La mail è obbligatoria."; // Controllo che sia una mail e che sia valida usando le espressioni regolari
+      if (!this.form.email.trim()) errors.email = "La mail è obbligatoria.";
+      if (!this.form.subject.trim()) errors.subject = "Non hai inserito un oggetto."; // Controllo che sia una mail e che sia valida usando le espressioni regolari
 
       if (this.form.email.trim() && !this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) errors.email = "La mail non è valida";
       if (!this.form.message.trim()) errors.message = "Il testo del messaggio è obbligatorio.";
@@ -2420,11 +2421,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // potrei passare direttamente this.form perchè i campi COINCIDONO
 
         axios.post("http://localhost:8000/api/messages", params).then(function (res) {
-          _this.form.name = "";
-          _this.form.email = "";
-          _this.form.subject = "";
-          _this.form.message = "";
-          _this.alertMessage = "Messaggio inviato con successo.";
+          // Controllo se comunque mi arrivano errori DAL BACKEND
+          if (res.data.errors) {
+            // Prendo gli errori DA LARAVEL e li metto comunque dentro errors
+            var _res$data$errors = res.data.errors,
+                name = _res$data$errors.name,
+                email = _res$data$errors.email,
+                subject = _res$data$errors.subject,
+                message = _res$data$errors.message;
+            var errors = {};
+            if (name) errors.name = name;
+            if (email) errors.email = email;
+            if (subject) errors.subject = subject;
+            if (message) errors.message = message;
+            _this.errors = errors;
+          } else {
+            _this.form.name = "";
+            _this.form.email = "";
+            _this.form.subject = "";
+            _this.form.message = "";
+            _this.alertMessage = "Messaggio inviato con successo.";
+          }
         })["catch"](function (err) {
           // console.error(err.response.status);
           _this.type = "danger";
