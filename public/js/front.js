@@ -2392,48 +2392,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     validateForm: function validateForm() {
       // TODO: Validazione
-      var errors = {};
-      if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
-      if (!this.form.email.trim()) errors.email = "La mail è obbligatoria."; // Controllo che sia una mail valida cusando le espressioni regolari
+      var errors = {}; // ! svuoto all'inizio e ricalcola
 
-      if (!this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) errors.email = "La mail non è valida";
+      if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
+      if (!this.form.email.trim()) errors.email = "La mail è obbligatoria."; // Controllo che sia una mail e che sia valida usando le espressioni regolari
+
+      if (this.form.email.trim() && !this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) errors.email = "La mail non è valida";
       if (!this.form.message.trim()) errors.message = "Il testo del messaggio è obbligatorio.";
       this.errors = errors;
+      this.alert = true; // console.log(this.errors);
     },
     sendForm: function sendForm() {
       var _this = this;
 
       // console.log(this.form);
-      // Richiamo validateForm
+      // * Richiamo validateForm
       this.validateForm(); // Controllo se ci sono errori per mostrare un alert diverso
 
-      !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(this.errors) ? this.type = "danger" : this.type = "success"; // Creo una variabile per recuperare i params
+      !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(this.errors) ? this.type = "danger" : this.type = "success"; // * Creo una variabile per recuperare i params
       // Posso usare anche lo spread
 
-      var params = _objectSpread({}, this.form); // Metto a true is loading
+      var params = _objectSpread({}, this.form);
 
+      if (!this.hasErrors) {
+        // Metto a true is loading
+        this.isLoading = true; // * Chiamo axios in POST per mandare i dati e gli passo params
+        // potrei passare direttamente this.form perchè i campi COINCIDONO
 
-      this.isLoading = true; // Chiamo axios in POST per mandare i dati e gli passo params
-      // Primo parametro chiamata api
-      // Secondo parametro il form inserito in una costante ma
-      // potrei passare direttamente this.form perchè i campi COINCIDONO
-
-      axios.post("http://localhost:8000/api/messages", params).then(function (res) {
-        _this.form.name = "";
-        _this.form.email = "";
-        _this.form.subject = "";
-        _this.form.message = "";
-        _this.alertMessage = "Messaggio inviato con successo.";
-      })["catch"](function (err) {
-        // console.error(err.response.status);
-        _this.type = "danger";
-        _this.errors = {
-          error: "Messaggio non inviato. Si è verificato un errore."
-        };
-      }).then(function () {
-        _this.alert = true;
-        _this.isLoading = false;
-      });
+        axios.post("http://localhost:8000/api/messages", params).then(function (res) {
+          _this.form.name = "";
+          _this.form.email = "";
+          _this.form.subject = "";
+          _this.form.message = "";
+          _this.alertMessage = "Messaggio inviato con successo.";
+        })["catch"](function (err) {
+          // console.error(err.response.status);
+          _this.type = "danger";
+          _this.errors = {
+            error: "Messaggio non inviato. Si è verificato un errore."
+          };
+        }).then(function () {
+          _this.alert = true;
+          _this.isLoading = false;
+        });
+      }
     }
   }
 });
@@ -39788,7 +39790,7 @@ var render = function () {
                     ? _c("span", [_vm._v(_vm._s(_vm.alertMessage))])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.hasErrors
+                  _vm.errors
                     ? _c(
                         "ul",
                         { staticClass: "mb-0 pl-4" },

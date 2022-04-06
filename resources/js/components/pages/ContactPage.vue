@@ -9,7 +9,7 @@
 				v-if="alert"
 			>
 				<span v-if="!hasErrors">{{ alertMessage }}</span>
-				<ul v-if="hasErrors" class="mb-0 pl-4">
+				<ul v-if="errors" class="mb-0 pl-4">
 					<li v-for="(error, key) in errors" :key="key">{{ error }}</li>
 				</ul>
 				<span @click="alert = !alert" class="h2 mb-0" role="button"
@@ -152,59 +152,66 @@ export default {
 	methods: {
 		validateForm() {
 			// TODO: Validazione
-			const errors = {};
+			const errors = {}; // ! svuoto all'inizio e ricalcola
+
 			if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
 			if (!this.form.email.trim()) errors.email = "La mail è obbligatoria.";
-			// Controllo che sia una mail valida cusando le espressioni regolari
-			if (!this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+			// Controllo che sia una mail e che sia valida usando le espressioni regolari
+			if (
+				this.form.email.trim() &&
+				!this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+			)
 				errors.email = "La mail non è valida";
 			if (!this.form.message.trim())
 				errors.message = "Il testo del messaggio è obbligatorio.";
+
 			this.errors = errors;
+			this.alert = true;
+			// console.log(this.errors);
 		},
 		sendForm() {
 			// console.log(this.form);
 
-			// Richiamo validateForm
+			// * Richiamo validateForm
 			this.validateForm();
 
 			// Controllo se ci sono errori per mostrare un alert diverso
 			!isEmpty(this.errors) ? (this.type = "danger") : (this.type = "success");
 
-			// Creo una variabile per recuperare i params
+			// * Creo una variabile per recuperare i params
 			// Posso usare anche lo spread
 			const params = {
 				...this.form,
 			};
 
-			// Metto a true is loading
-			this.isLoading = true;
+			if (!this.hasErrors) {
+				// Metto a true is loading
+				this.isLoading = true;
 
-			// Chiamo axios in POST per mandare i dati e gli passo params
-			// Primo parametro chiamata api
-			// Secondo parametro il form inserito in una costante ma
-			// potrei passare direttamente this.form perchè i campi COINCIDONO
-			axios
-				.post("http://localhost:8000/api/messages", params)
-				.then((res) => {
-					this.form.name = "";
-					this.form.email = "";
-					this.form.subject = "";
-					this.form.message = "";
-					this.alertMessage = "Messaggio inviato con successo.";
-				})
-				.catch((err) => {
-					// console.error(err.response.status);
+				// * Chiamo axios in POST per mandare i dati e gli passo params
+				// potrei passare direttamente this.form perchè i campi COINCIDONO
+				axios
+					.post("http://localhost:8000/api/messages", params)
+					.then((res) => {
+						this.form.name = "";
+						this.form.email = "";
+						this.form.subject = "";
+						this.form.message = "";
+						this.alertMessage = "Messaggio inviato con successo.";
+					})
+					.catch((err) => {
+						// console.error(err.response.status);
 
-					this.type = "danger";
-					this.errors = {
-						error: "Messaggio non inviato. Si è verificato un errore.",
-					};
-				})
-				.then(() => {
-					this.alert = true;
-					this.isLoading = false;
-				});
+						this.type = "danger";
+						this.errors = {
+							error: "Messaggio non inviato. Si è verificato un errore.",
+						};
+					})
+					.then(() => {
+						this.alert = true;
+						this.isLoading = false;
+					});
+			}
 		},
 	},
 };
