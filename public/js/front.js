@@ -2340,11 +2340,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactPage",
@@ -2356,6 +2351,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         subject: "",
         message: ""
       },
+      type: "success",
       alert: false,
       isLoading: false,
       alertMessage: ""
@@ -2385,8 +2381,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.form.email = "";
         _this.form.subject = "";
         _this.form.message = "";
-        _this.alertMessage = "Messaggio inviato con successo";
-      })["catch"](function (err) {}).then(function () {
+        _this.alertMessage = "Messaggio inviato con successo.";
+      })["catch"](function (err) {
+        // console.error(err);
+        _this.type = "danger";
+        _this.alertMessage = "Messaggio non inviato. Controlla i campi.";
+      }).then(function () {
         _this.alert = true;
         _this.isLoading = false;
       });
@@ -39735,7 +39735,8 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "\n\t\t\t\talert\n\t\t\t\td-flex\n\t\t\t\tjustify-content-between\n\t\t\t\talign-items-center\n\t\t\t\talert-success\n\t\t\t",
+                    "alert d-flex justify-content-between align-items-center",
+                  class: "alert-" + _vm.type,
                   attrs: { role: "alert" },
                 },
                 [

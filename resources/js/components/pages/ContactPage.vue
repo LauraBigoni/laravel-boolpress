@@ -3,13 +3,8 @@
 		<div class="container py-5 my-4">
 			<Loader v-if="isLoading" />
 			<div
-				class="
-					alert
-					d-flex
-					justify-content-between
-					align-items-center
-					alert-success
-				"
+				class="alert d-flex justify-content-between align-items-center"
+				:class="`alert-${type}`"
 				role="alert"
 				v-if="alert"
 			>
@@ -119,6 +114,7 @@ export default {
 				subject: "",
 				message: "",
 			},
+			type: "success",
 			alert: false,
 			isLoading: false,
 			alertMessage: "",
@@ -150,9 +146,14 @@ export default {
 					this.form.email = "";
 					this.form.subject = "";
 					this.form.message = "";
-					this.alertMessage = "Messaggio inviato con successo";
+					this.alertMessage = "Messaggio inviato con successo.";
 				})
-				.catch((err) => {})
+				.catch((err) => {
+					// console.error(err);
+
+					this.type = "danger";
+					this.alertMessage = "Messaggio non inviato. Controlla i campi.";
+				})
 				.then(() => {
 					this.alert = true;
 					this.isLoading = false;
