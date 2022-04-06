@@ -2230,6 +2230,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2342,6 +2344,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactPage",
@@ -2365,7 +2369,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     hasErrors: function hasErrors() {
-      return Object.keys(this.errors).length;
+      // ! Ha errori se non è vuoto, se è vuoto non ha errori
+      return !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(this.errors);
     }
   },
   methods: {
@@ -39750,10 +39755,19 @@ var render = function () {
                   attrs: { role: "alert" },
                 },
                 [
-                  _vm.hasErrors || _vm.alert
-                    ? _c("span", [
-                        _vm._v(_vm._s(_vm.alertMessage || _vm.errors.error)),
-                      ])
+                  _vm.alertMessage || _vm.alert
+                    ? _c("span", [_vm._v(_vm._s(_vm.alertMessage))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hasErrors
+                    ? _c(
+                        "ul",
+                        { staticClass: "mb-0" },
+                        _vm._l(_vm.errors, function (error, key) {
+                          return _c("li", { key: key }, [_vm._v(_vm._s(error))])
+                        }),
+                        0
+                      )
                     : _vm._e(),
                   _vm._v(" "),
                   _c(

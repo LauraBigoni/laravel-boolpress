@@ -8,9 +8,10 @@
 				role="alert"
 				v-if="alert"
 			>
-				<span v-if="hasErrors || alert">{{
-					alertMessage || errors.error
-				}}</span>
+				<span v-if="alertMessage || alert">{{ alertMessage }}</span>
+				<ul v-if="hasErrors" class="mb-0">
+					<li v-for="(error, key) in errors" :key="key">{{ error }}</li>
+				</ul>
 				<span @click="alert = !alert" class="h2 mb-0" role="button"
 					>&times;</span
 				>
@@ -106,6 +107,8 @@
 
 <script>
 import Loader from "../Loader.vue";
+import { isEmpty } from "lodash";
+
 export default {
 	name: "ContactPage",
 	data() {
@@ -126,7 +129,8 @@ export default {
 	components: { Loader },
 	computed: {
 		hasErrors() {
-			return Object.keys(this.errors).length;
+			// ! Ha errori se non è vuoto, se è vuoto non ha errori
+			return !isEmpty(this.errors);
 		},
 	},
 	methods: {
