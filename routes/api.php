@@ -26,5 +26,5 @@ Route::namespace('Api')
         Route::get('/categories/{label}', 'CategoryController@show');
         Route::get('/tags', 'TagController@index');
         Route::get('/tags/{label}', 'TagController@show');
-        Route::post('/messages', 'ContactMessageController@send');
+        Route::post('/messages', 'MessageController@store');
     });

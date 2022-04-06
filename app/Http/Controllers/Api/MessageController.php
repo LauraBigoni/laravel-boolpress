@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Mail\ContactMessageMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class ContactMessageController extends Controller
+class MessageController extends Controller
 {
     /**
      * Send an email from the website form.
@@ -16,7 +17,7 @@ class ContactMessageController extends Controller
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function send(Request $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
@@ -37,6 +38,10 @@ class ContactMessageController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         };
+
+        $message = new Message();
+        $message->fill($data);
+        $message->save();
 
         $mail = new ContactMessageMail($data);
         Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail);
