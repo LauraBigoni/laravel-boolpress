@@ -2340,6 +2340,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactPage",
@@ -2351,6 +2353,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         subject: "",
         message: ""
       },
+      errors: {},
       type: "success",
       alert: false,
       isLoading: false,
@@ -2359,6 +2362,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  computed: {
+    hasErrors: function hasErrors() {
+      return Object.keys(this.errors).length;
+    }
   },
   methods: {
     sendForm: function sendForm() {
@@ -2383,9 +2391,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.form.message = "";
         _this.alertMessage = "Messaggio inviato con successo.";
       })["catch"](function (err) {
-        // console.error(err);
+        // console.error(err.response.status);
         _this.type = "danger";
-        _this.alertMessage = "Messaggio non inviato. Controlla i campi.";
+        _this.errors = {
+          error: "Messaggio non inviato. Si è verificato un errore."
+        };
       }).then(function () {
         _this.alert = true;
         _this.isLoading = false;
@@ -39740,7 +39750,11 @@ var render = function () {
                   attrs: { role: "alert" },
                 },
                 [
-                  _c("span", [_vm._v(_vm._s(_vm.alertMessage))]),
+                  _vm.hasErrors || _vm.alert
+                    ? _c("span", [
+                        _vm._v(_vm._s(_vm.alertMessage || _vm.errors.error)),
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "span",

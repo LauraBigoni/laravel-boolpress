@@ -8,7 +8,9 @@
 				role="alert"
 				v-if="alert"
 			>
-				<span>{{ alertMessage }}</span>
+				<span v-if="hasErrors || alert">{{
+					alertMessage || errors.error
+				}}</span>
 				<span @click="alert = !alert" class="h2 mb-0" role="button"
 					>&times;</span
 				>
@@ -114,6 +116,7 @@ export default {
 				subject: "",
 				message: "",
 			},
+			errors: {},
 			type: "success",
 			alert: false,
 			isLoading: false,
@@ -121,6 +124,11 @@ export default {
 		};
 	},
 	components: { Loader },
+	computed: {
+		hasErrors() {
+			return Object.keys(this.errors).length;
+		},
+	},
 	methods: {
 		sendForm() {
 			// * Controllo di raccogliere i dati correttamente
@@ -149,10 +157,12 @@ export default {
 					this.alertMessage = "Messaggio inviato con successo.";
 				})
 				.catch((err) => {
-					// console.error(err);
+					// console.error(err.response.status);
 
 					this.type = "danger";
-					this.alertMessage = "Messaggio non inviato. Controlla i campi.";
+					this.errors = {
+						error: "Messaggio non inviato. Si è verificato un errore.",
+					};
 				})
 				.then(() => {
 					this.alert = true;
