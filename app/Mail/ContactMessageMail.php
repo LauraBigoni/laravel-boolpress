@@ -29,6 +29,6 @@ class ContactMessageMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.messages')->with(['contact' => $this->contact]);
+        return $this->from($this->contact['email'])->markdown('mails.messages')->with(['contact' => $this->contact]);
     }
 }

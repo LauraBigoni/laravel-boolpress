@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Mail\ContactMessageMail;
 use Illuminate\Http\Request;
+use App\Mail\ContactMessageMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class ContactMessageController extends Controller
 {
@@ -19,9 +20,25 @@ class ContactMessageController extends Controller
     {
         $data = $request->all();
 
+        // # Validazione
+        $validator = Validator::make(
+            $data,
+            [
+                'email' => 'required|email',
+                'message' => 'required'
+            ],
+            [
+                'email.required' => 'La mail è obbligatoria.',
+                'email.email' => 'L\'indirizzo email non è valido.',
+                'message.required' => 'Il testo del messaggio è obbligatorio.'
+            ]
+        );
+
+        if ($validator->fails());
+
         $mail = new ContactMessageMail($data);
         Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail);
 
-        return response()->json($mail);
+        return response('Mail sent successfully', 204)->json(['errors' => $validator->errors()]);
     }
 }
