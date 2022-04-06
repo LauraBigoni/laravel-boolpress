@@ -39699,8 +39699,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "md-form mb-0" }, [
                         _c("input", {
-                          staticClass:
-                            "form-control bg-transparent border-info",
+                          staticClass: "form-control border-info",
                           attrs: { type: "text", id: "name", name: "name" },
                         }),
                         _vm._v(" "),
@@ -39713,8 +39712,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "md-form mb-0" }, [
                         _c("input", {
-                          staticClass:
-                            "form-control bg-transparent border-info",
+                          staticClass: "form-control border-info",
                           attrs: { type: "text", id: "email", name: "email" },
                         }),
                         _vm._v(" "),
@@ -39729,8 +39727,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("div", { staticClass: "md-form mb-0" }, [
                         _c("input", {
-                          staticClass:
-                            "form-control bg-transparent border-info",
+                          staticClass: "form-control border-info",
                           attrs: {
                             type: "text",
                             id: "subject",
@@ -39749,8 +39746,7 @@ var staticRenderFns = [
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("div", { staticClass: "md-form" }, [
                         _c("textarea", {
-                          staticClass:
-                            "form-control bg-transparent border-info md-textarea",
+                          staticClass: "form-control border-info md-textarea",
                           attrs: {
                             type: "text",
                             id: "message",

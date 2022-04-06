@@ -18,7 +18,7 @@
 										type="text"
 										id="name"
 										name="name"
-										class="form-control bg-transparent border-info"
+										class="form-control border-info"
 									/>
 									<label for="name" class="">Il tuo nome</label>
 								</div>
@@ -29,7 +29,7 @@
 										type="text"
 										id="email"
 										name="email"
-										class="form-control bg-transparent border-info"
+										class="form-control border-info"
 									/>
 									<label for="email" class="">La tua email</label>
 								</div>
@@ -42,7 +42,7 @@
 										type="text"
 										id="subject"
 										name="subject"
-										class="form-control bg-transparent border-info"
+										class="form-control border-info"
 									/>
 									<label for="subject" class="">Oggetto</label>
 								</div>
@@ -56,7 +56,7 @@
 										id="message"
 										name="message"
 										rows="4"
-										class="form-control bg-transparent border-info md-textarea"
+										class="form-control border-info md-textarea"
 									></textarea>
 									<label for="message">Il tuo messaggio</label>
 								</div>
