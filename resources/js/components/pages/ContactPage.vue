@@ -8,8 +8,8 @@
 				role="alert"
 				v-if="alert"
 			>
-				<span v-if="alertMessage || alert">{{ alertMessage }}</span>
-				<ul v-if="hasErrors" class="mb-0">
+				<span v-if="!hasErrors">{{ alertMessage }}</span>
+				<ul v-if="hasErrors" class="mb-0 pl-4">
 					<li v-for="(error, key) in errors" :key="key">{{ error }}</li>
 				</ul>
 				<span @click="alert = !alert" class="h2 mb-0" role="button"
@@ -34,8 +34,12 @@
 										id="name"
 										v-model="form.name"
 										class="form-control border-info"
+										:class="{ 'is-invalid': errors.name }"
 									/>
-									<label for="name" class="">Il tuo nome</label>
+									<div v-if="errors.name" class="invalid-feedback">
+										{{ errors.name }}
+									</div>
+									<label v-else for="name" class="">Il tuo nome</label>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -45,8 +49,12 @@
 										id="email"
 										v-model="form.email"
 										class="form-control border-info"
+										:class="{ 'is-invalid': errors.email }"
 									/>
-									<label for="email" class="">La tua email</label>
+									<div v-if="errors.email" class="invalid-feedback">
+										{{ errors.email }}
+									</div>
+									<label v-else for="email">La tua email</label>
 								</div>
 							</div>
 						</div>
@@ -58,8 +66,12 @@
 										id="subject"
 										v-model="form.subject"
 										class="form-control border-info"
+										:class="{ 'is-invalid': errors.subject }"
 									/>
-									<label for="subject" class="">Oggetto</label>
+									<div v-if="errors.subject" class="invalid-feedback">
+										{{ errors.subject }}
+									</div>
+									<label v-else for="subject">Oggetto</label>
 								</div>
 							</div>
 						</div>
@@ -72,8 +84,12 @@
 										v-model="form.message"
 										rows="4"
 										class="form-control border-info md-textarea"
+										:class="{ 'is-invalid': errors.message }"
 									></textarea>
-									<label for="message">Il tuo messaggio</label>
+									<div v-if="errors.message" class="invalid-feedback">
+										{{ errors.message }}
+									</div>
+									<label v-else for="message">Il tuo messaggio</label>
 								</div>
 							</div>
 						</div>
@@ -120,7 +136,7 @@ export default {
 				message: "",
 			},
 			errors: {},
-			type: "success",
+			type: "",
 			alert: false,
 			isLoading: false,
 			alertMessage: "",
@@ -134,11 +150,28 @@ export default {
 		},
 	},
 	methods: {
+		validateForm() {
+			// TODO: Validazione
+			const errors = {};
+			if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
+			if (!this.form.email.trim()) errors.email = "La mail è obbligatoria.";
+			// Controllo che sia una mail valida cusando le espressioni regolari
+			if (!this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+				errors.email = "La mail non è valida";
+			if (!this.form.message.trim())
+				errors.message = "Il testo del messaggio è obbligatorio.";
+			this.errors = errors;
+		},
 		sendForm() {
-			// * Controllo di raccogliere i dati correttamente
 			// console.log(this.form);
 
-			// * Creo una variabile per recuperare i params
+			// Richiamo validateForm
+			this.validateForm();
+
+			// Controllo se ci sono errori per mostrare un alert diverso
+			!isEmpty(this.errors) ? (this.type = "danger") : (this.type = "success");
+
+			// Creo una variabile per recuperare i params
 			// Posso usare anche lo spread
 			const params = {
 				...this.form,
@@ -147,7 +180,7 @@ export default {
 			// Metto a true is loading
 			this.isLoading = true;
 
-			// * Chiamo axios in POST per mandare i dati e gli passo params
+			// Chiamo axios in POST per mandare i dati e gli passo params
 			// Primo parametro chiamata api
 			// Secondo parametro il form inserito in una costante ma
 			// potrei passare direttamente this.form perchè i campi COINCIDONO

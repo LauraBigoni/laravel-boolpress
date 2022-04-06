@@ -2345,6 +2345,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2358,7 +2374,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         message: ""
       },
       errors: {},
-      type: "success",
+      type: "",
       alert: false,
       isLoading: false,
       alertMessage: ""
@@ -2374,17 +2390,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
+    validateForm: function validateForm() {
+      // TODO: Validazione
+      var errors = {};
+      if (!this.form.name.trim()) errors.name = "Il nome non è valido.";
+      if (!this.form.email.trim()) errors.email = "La mail è obbligatoria."; // Controllo che sia una mail valida cusando le espressioni regolari
+
+      if (!this.form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) errors.email = "La mail non è valida";
+      if (!this.form.message.trim()) errors.message = "Il testo del messaggio è obbligatorio.";
+      this.errors = errors;
+    },
     sendForm: function sendForm() {
       var _this = this;
 
-      // * Controllo di raccogliere i dati correttamente
       // console.log(this.form);
-      // * Creo una variabile per recuperare i params
+      // Richiamo validateForm
+      this.validateForm(); // Controllo se ci sono errori per mostrare un alert diverso
+
+      !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(this.errors) ? this.type = "danger" : this.type = "success"; // Creo una variabile per recuperare i params
       // Posso usare anche lo spread
+
       var params = _objectSpread({}, this.form); // Metto a true is loading
 
 
-      this.isLoading = true; // * Chiamo axios in POST per mandare i dati e gli passo params
+      this.isLoading = true; // Chiamo axios in POST per mandare i dati e gli passo params
       // Primo parametro chiamata api
       // Secondo parametro il form inserito in una costante ma
       // potrei passare direttamente this.form perchè i campi COINCIDONO
@@ -39755,14 +39784,14 @@ var render = function () {
                   attrs: { role: "alert" },
                 },
                 [
-                  _vm.alertMessage || _vm.alert
+                  !_vm.hasErrors
                     ? _c("span", [_vm._v(_vm._s(_vm.alertMessage))])
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.hasErrors
                     ? _c(
                         "ul",
-                        { staticClass: "mb-0" },
+                        { staticClass: "mb-0 pl-4" },
                         _vm._l(_vm.errors, function (error, key) {
                           return _c("li", { key: key }, [_vm._v(_vm._s(error))])
                         }),
@@ -39815,6 +39844,7 @@ var render = function () {
                           },
                         ],
                         staticClass: "form-control border-info",
+                        class: { "is-invalid": _vm.errors.name },
                         attrs: { type: "text", id: "name" },
                         domProps: { value: _vm.form.name },
                         on: {
@@ -39827,9 +39857,17 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Il tuo nome"),
-                      ]),
+                      _vm.errors.name
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.name) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            ),
+                          ])
+                        : _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("Il tuo nome"),
+                          ]),
                     ]),
                   ]),
                   _vm._v(" "),
@@ -39845,6 +39883,7 @@ var render = function () {
                           },
                         ],
                         staticClass: "form-control border-info",
+                        class: { "is-invalid": _vm.errors.email },
                         attrs: { type: "text", id: "email" },
                         domProps: { value: _vm.form.email },
                         on: {
@@ -39857,9 +39896,17 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _c("label", { attrs: { for: "email" } }, [
-                        _vm._v("La tua email"),
-                      ]),
+                      _vm.errors.email
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.email) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            ),
+                          ])
+                        : _c("label", { attrs: { for: "email" } }, [
+                            _vm._v("La tua email"),
+                          ]),
                     ]),
                   ]),
                 ]),
@@ -39877,6 +39924,7 @@ var render = function () {
                           },
                         ],
                         staticClass: "form-control border-info",
+                        class: { "is-invalid": _vm.errors.subject },
                         attrs: { type: "text", id: "subject" },
                         domProps: { value: _vm.form.subject },
                         on: {
@@ -39889,9 +39937,17 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _c("label", { attrs: { for: "subject" } }, [
-                        _vm._v("Oggetto"),
-                      ]),
+                      _vm.errors.subject
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.subject) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            ),
+                          ])
+                        : _c("label", { attrs: { for: "subject" } }, [
+                            _vm._v("Oggetto"),
+                          ]),
                     ]),
                   ]),
                 ]),
@@ -39909,6 +39965,7 @@ var render = function () {
                           },
                         ],
                         staticClass: "form-control border-info md-textarea",
+                        class: { "is-invalid": _vm.errors.message },
                         attrs: { type: "text", id: "message", rows: "4" },
                         domProps: { value: _vm.form.message },
                         on: {
@@ -39921,9 +39978,17 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _c("label", { attrs: { for: "message" } }, [
-                        _vm._v("Il tuo messaggio"),
-                      ]),
+                      _vm.errors.message
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.message) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            ),
+                          ])
+                        : _c("label", { attrs: { for: "message" } }, [
+                            _vm._v("Il tuo messaggio"),
+                          ]),
                     ]),
                   ]),
                 ]),
