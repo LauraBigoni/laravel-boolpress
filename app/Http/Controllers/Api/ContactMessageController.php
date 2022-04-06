@@ -34,11 +34,13 @@ class ContactMessageController extends Controller
             ]
         );
 
-        if ($validator->fails());
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        };
 
         $mail = new ContactMessageMail($data);
         Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail);
 
-        return response()->json(['errors' => $validator->errors()]);
+        return response('Mail sent successfully', 204);
     }
 }
