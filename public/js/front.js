@@ -2229,6 +2229,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2323,8 +2330,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ContactPage"
+  name: "ContactPage",
+  data: function data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      },
+      alert: false,
+      isLoading: false,
+      alertMessage: ""
+    };
+  },
+  components: {
+    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    sendForm: function sendForm() {
+      var _this = this;
+
+      // * Controllo di raccogliere i dati correttamente
+      // console.log(this.form);
+      // * Creo una variabile per recuperare i params
+      // Posso usare anche lo spread
+      var params = _objectSpread({}, this.form); // Metto a true is loading
+
+
+      this.isLoading = true; // * Chiamo axios in POST per mandare i dati e gli passo params
+      // Primo parametro chiamata api
+      // Secondo parametro il form inserito in una costante ma
+      // potrei passare direttamente this.form perchè i campi COINCIDONO
+
+      axios.post("http://localhost:8000/api/messages", params).then(function (res) {
+        _this.form.name = "";
+        _this.form.email = "";
+        _this.form.subject = "";
+        _this.form.message = "";
+        _this.alertMessage = "Messaggio inviato con successo";
+      })["catch"](function (err) {}).then(function () {
+        _this.alert = true;
+        _this.isLoading = false;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -39653,18 +39720,44 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      { staticClass: "col-8 mx-auto", attrs: { id: "contacts" } },
-      [
-        _c("div", { staticClass: "container py-5 my-4" }, [
+  return _c(
+    "section",
+    { staticClass: "col-9 mx-auto", attrs: { id: "contacts" } },
+    [
+      _c(
+        "div",
+        { staticClass: "container py-5 my-4" },
+        [
+          _vm.isLoading ? _c("Loader") : _vm._e(),
+          _vm._v(" "),
+          _vm.alert
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "\n\t\t\t\talert\n\t\t\t\td-flex\n\t\t\t\tjustify-content-between\n\t\t\t\talign-items-center\n\t\t\t\talert-success\n\t\t\t",
+                  attrs: { role: "alert" },
+                },
+                [
+                  _c("span", [_vm._v(_vm._s(_vm.alertMessage))]),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "h2 mb-0",
+                      attrs: { role: "button" },
+                      on: {
+                        click: function ($event) {
+                          _vm.alert = !_vm.alert
+                        },
+                      },
+                    },
+                    [_vm._v("×")]
+                  ),
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "h2",
             { staticClass: "h1-responsive font-weight-bold text-center my-4" },
@@ -39679,118 +39772,191 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-9 mb-md-0 mb-5" }, [
-              _c(
-                "form",
-                {
-                  attrs: {
-                    id: "contact-form",
-                    name: "contact-form",
-                    action: "",
-                    method: "POST",
-                  },
-                },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "md-form mb-0" }, [
-                        _c("input", {
-                          staticClass: "form-control border-info",
-                          attrs: { type: "text", id: "name", name: "name" },
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "name" } }, [
-                          _vm._v("Il tuo nome"),
-                        ]),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "md-form mb-0" }, [
-                        _c("input", {
-                          staticClass: "form-control border-info",
-                          attrs: { type: "text", id: "email", name: "email" },
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "email" } }, [
-                          _vm._v("La tua email"),
-                        ]),
+              _c("form", { attrs: { id: "contact-form" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "md-form mb-0" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name",
+                          },
+                        ],
+                        staticClass: "form-control border-info",
+                        attrs: { type: "text", id: "name" },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "name", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "name" } }, [
+                        _vm._v("Il tuo nome"),
                       ]),
                     ]),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "md-form mb-0" }, [
-                        _c("input", {
-                          staticClass: "form-control border-info",
-                          attrs: {
-                            type: "text",
-                            id: "subject",
-                            name: "subject",
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "md-form mb-0" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.email,
+                            expression: "form.email",
                           },
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "subject" } }, [
-                          _vm._v("Oggetto"),
-                        ]),
+                        ],
+                        staticClass: "form-control border-info",
+                        attrs: { type: "text", id: "email" },
+                        domProps: { value: _vm.form.email },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "email", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "email" } }, [
+                        _vm._v("La tua email"),
                       ]),
                     ]),
                   ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "md-form" }, [
-                        _c("textarea", {
-                          staticClass: "form-control border-info md-textarea",
-                          attrs: {
-                            type: "text",
-                            id: "message",
-                            name: "message",
-                            rows: "4",
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "md-form mb-0" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.subject,
+                            expression: "form.subject",
                           },
-                        }),
-                        _vm._v(" "),
-                        _c("label", { attrs: { for: "message" } }, [
-                          _vm._v("Il tuo messaggio"),
-                        ]),
+                        ],
+                        staticClass: "form-control border-info",
+                        attrs: { type: "text", id: "subject" },
+                        domProps: { value: _vm.form.subject },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "subject", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "subject" } }, [
+                        _vm._v("Oggetto"),
                       ]),
                     ]),
                   ]),
-                ]
-              ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "md-form" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.message,
+                            expression: "form.message",
+                          },
+                        ],
+                        staticClass: "form-control border-info md-textarea",
+                        attrs: { type: "text", id: "message", rows: "4" },
+                        domProps: { value: _vm.form.message },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "message", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "message" } }, [
+                        _vm._v("Il tuo messaggio"),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "text-center text-md-left" }, [
-                _c("a", { staticClass: "btn btn-primary" }, [_vm._v("Invia")]),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: { click: _vm.sendForm },
+                  },
+                  [_vm._v("Invia")]
+                ),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "status" }),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-3 text-center" }, [
-              _c("ul", { staticClass: "list-unstyled mb-0" }, [
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-map-marker-alt fa-2x" }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("Anghiari, AR 52031, ITALY")]),
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-phone mt-4 fa-2x" }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("0545 782345")]),
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("i", { staticClass: "fas fa-envelope mt-4 fa-2x" }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("contact@boolpress.com")]),
-                ]),
-              ]),
-            ]),
+            _vm._m(0),
           ]),
+        ],
+        1
+      ),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 text-center" }, [
+      _c("ul", { staticClass: "list-unstyled mb-0" }, [
+        _c("li", [
+          _c("i", {
+            staticClass: "fas fa-map-marker-alt fa-2x",
+            attrs: { role: "button" },
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v("Anghiari, AR 52031, ITALY")]),
         ]),
-      ]
-    )
+        _vm._v(" "),
+        _c("li", [
+          _c("i", {
+            staticClass: "fas fa-phone mt-4 fa-2x",
+            attrs: { role: "button" },
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v("0545 782345")]),
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("i", {
+            staticClass: "fas fa-envelope mt-4 fa-2x",
+            attrs: { role: "button" },
+          }),
+          _vm._v(" "),
+          _c("p", [_vm._v("contact@boolpress.com")]),
+        ]),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
