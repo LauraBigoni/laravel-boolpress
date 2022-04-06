@@ -1918,12 +1918,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -2345,6 +2339,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _posts_PostsList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../posts/PostsList.vue */ "./resources/js/components/posts/PostsList.vue");
+//
+//
 //
 //
 //
@@ -39172,13 +39168,12 @@ var render = function () {
     [
       _c("Navbar"),
       _vm._v(" "),
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 my-4" }, [
-            _c("div", { staticClass: "content" }, [_c("router-view")], 1),
-          ]),
-        ]),
-      ]),
+      _c(
+        "main",
+        { staticClass: "col-12 my-4 content" },
+        [_c("router-view")],
+        1
+      ),
     ],
     1
   )
@@ -39819,12 +39814,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container-fluid pt-5" },
-    [_c("PostsList")],
-    1
-  )
+  return _c("section", { attrs: { id: "posts-list" } }, [
+    _c("div", { staticClass: "container-fluid pt-5" }, [_c("PostsList")], 1),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
